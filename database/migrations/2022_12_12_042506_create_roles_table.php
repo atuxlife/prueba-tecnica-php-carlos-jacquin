@@ -13,20 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id')->comment('Role del usuario');
-            $table->string('firstname')->comment('Nombre del usuario');
-            $table->string('lastname')->comment('Apellido del usuario');
-            $table->string('email')->unique()->comment('Email del usuario');
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('username')->unique()->comment('Username del usuario');
-            $table->string('password')->comment('Password del usuario');
-            $table->rememberToken();
+            $table->string('name')->comment('Nombre del role de usuario');
             $table->boolean('status')->comment('Estado del registro');
             $table->string('ip_create', 15)->comment('Ip desde donde se crea el registro');
             $table->string('ip_update', 15)->nullable($value = true)->comment('Ip desde donde se actualiza el registro');
             $table->timestamps();
+        });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
@@ -37,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('roles');
     }
 };
