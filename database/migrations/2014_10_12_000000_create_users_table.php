@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('password')->comment('Password del usuario');
             $table->rememberToken();
             $table->boolean('status')->comment('Estado del registro');
+            $table->unsignedBigInteger('user_create_id')->comment('Usuario quien crea el registro');
+            $table->unsignedBigInteger('user_update_id')->nullable($value = true)->comment('Usuario quien modifica el registro');
             $table->string('ip_create', 15)->comment('Ip desde donde se crea el registro');
             $table->string('ip_update', 15)->nullable($value = true)->comment('Ip desde donde se actualiza el registro');
             $table->timestamps();
