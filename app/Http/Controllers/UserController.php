@@ -36,7 +36,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'role_id'   => 'required|numeric',
+            'role_id'   => 'required',
             'firstname' => 'required',
             'lastname'  => 'required',
             'username'  => 'required|string|min:6|max:15',
@@ -82,7 +82,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function updateUser(Request $request)
     {
         /*if( auth()->user()->role == 'U' ){
             return response()->json(['error' => 'Unauthorized.'], 401);
@@ -104,7 +104,6 @@ class UserController extends Controller
         $user->lastname     = $request->lastname;
         $user->username     = $request->username;
         $user->email        = $request->email;
-        $user->password     = Hash::make($request->password);
         $user->status       = $request->status;
         $user->ip_create    = $request->ip_create;
 

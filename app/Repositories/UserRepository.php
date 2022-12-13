@@ -25,7 +25,7 @@ class UserRepository implements UserRepositoryInterface
 
     public function updateUser($data)
     {
-        return User::update($data);
+        return User::updateUser($data);
     }
 
     public function loginUser($data)
