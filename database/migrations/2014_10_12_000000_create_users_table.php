@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id')->comment('Role del usuario');
+            $table->enum('role',['A','U'])->comment('Role del usuario'); // Admin - Usuario
             $table->string('firstname')->comment('Nombre del usuario');
             $table->string('lastname')->comment('Apellido del usuario');
             $table->string('email')->unique()->comment('Email del usuario');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('username')->unique()->comment('Username del usuario');
             $table->string('password')->comment('Password del usuario');
             $table->rememberToken();
             $table->boolean('status')->comment('Estado del registro');

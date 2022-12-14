@@ -39,7 +39,6 @@ class UserController extends Controller
             'role_id'   => 'required',
             'firstname' => 'required',
             'lastname'  => 'required',
-            'username'  => 'required|string|min:6|max:15',
             'email'     => 'required|email|unique:users',
             'password'  => 'required|min:8|confirmed',
             'status'    => 'required|boolean',
@@ -50,7 +49,6 @@ class UserController extends Controller
         $user->role_id      = $request->role_id;
         $user->firstname    = $request->firstname;
         $user->lastname     = $request->lastname;
-        $user->username     = $request->username;
         $user->email        = $request->email;
         $user->password     = Hash::make($request->password);
         $user->status       = $request->status;
@@ -88,7 +86,6 @@ class UserController extends Controller
             'role_id'   => 'required|numeric',
             'firstname' => 'required',
             'lastname'  => 'required',
-            'username'  => 'required|string|min:6|max:15',
             'email'     => 'required|email|unique:users',
             'status'    => 'required|boolean',
             'ip_update' => 'required|string|max:15',
@@ -98,7 +95,6 @@ class UserController extends Controller
         $user->role_id      = $request->role_id;
         $user->firstname    = $request->firstname;
         $user->lastname     = $request->lastname;
-        $user->username     = $request->username;
         $user->email        = $request->email;
         $user->status       = $request->status;
         $user->ip_create    = $request->ip_create;
@@ -113,11 +109,11 @@ class UserController extends Controller
 
     public function login(Request $request){
         $request->validate([
-            'username'  => 'required|string|min:6|max:15',
+            'email'  => 'required|string|min:6|max:15',
             'password'  => 'required|min:8',
         ]);
         
-        $user = User::where("username", "=", $request->username)->first();
+        $user = User::where("email", "=", $request->email)->first();
 
         if( isset($user->id) ){
             if(Hash::check($request->password, $user->password)){
