@@ -9,8 +9,8 @@ Route::post('login', [UserController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('list-users', [UserController::class, 'index']);
-    Route::post('create-user', [UserController::class, 'create']);
     Route::get('show-user/{id}', [UserController::class, 'show']);
+    Route::post('create-user', [UserController::class, 'create']);
     Route::put('update-user/{id}', [UserController::class, 'updateUser']);
     Route::get('logout', [UserController::class, 'logout']);
 });

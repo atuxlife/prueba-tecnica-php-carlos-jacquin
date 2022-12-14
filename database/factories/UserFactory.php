@@ -27,9 +27,9 @@ class UserFactory extends Factory
 
         return [
             'role'              => $this->faker->randomElement(['A','U']),
-            'firstname'         => fake()->name(),
-            'lastname'          => fake()->lastName(),
-            'email'             => fake()->unique()->safeEmail(),
+            'firstname'         => $this->faker->name(),
+            'lastname'          => $this->faker->lastName(),
+            'email'             => $this->faker->unique()->safeEmail(),
             'email_verified_at' => Carbon::now(),
             'password'          => $hash, // password
             'remember_token'    => Str::random(10),

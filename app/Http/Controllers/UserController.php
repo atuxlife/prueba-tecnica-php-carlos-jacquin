@@ -25,7 +25,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json($users,201);
+        return response()->json($users,200);
     }
 
     /**
@@ -71,7 +71,7 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $user = User::find($request->id);
-        return response()->json($user,201);
+        return response()->json($user,200);
     }
 
     /**
@@ -104,7 +104,7 @@ class UserController extends Controller
         return response()->json([
             'message'   => '¡Usuario modificado exitosamente!',
             'user'      => $user
-        ], 201);
+        ], 200);
     }
 
     public function login(Request $request){
@@ -123,12 +123,12 @@ class UserController extends Controller
                     "status"        => 1,
                     "msg"           => "¡Iniciaste sesión correctamente!",
                     "access_token"  => $token,
-                ]);
+                ], 201);
             } else {
                 return response()->json([
                     "status"    => 0,
                     "msg"       => "¡Datos ingresados erróneos, no puede iniciar sesión!",
-                ]);
+                ], 401);
             }
         } else {
             return response()->json([
@@ -144,6 +144,6 @@ class UserController extends Controller
         return response()->json([
             "status"    => 1,
             "msg"       => "¡Cierre de sesión!"
-        ]);
+        ], 200);
     }
 }
