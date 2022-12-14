@@ -84,10 +84,6 @@ class UserController extends Controller
      */
     public function updateUser(Request $request)
     {
-        /*if( auth()->user()->role == 'U' ){
-            return response()->json(['error' => 'Unauthorized.'], 401);
-        }*/
-
         $request->validate([
             'role_id'   => 'required|numeric',
             'firstname' => 'required',
